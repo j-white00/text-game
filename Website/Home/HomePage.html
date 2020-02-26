@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="HomeStyle.css">
-    <title>Text Game</title>
-  </head>
-  <body>
-    <div class="bg"></div>
-      <div class="ui">
-        <form action="../Game/GamePage.html">
-          <input type="text" placeholder="Enter Username...">
-          <input type="submit" value="Play">
-        </form>
-      </div>
-  </body>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="HomeStyle.css">
+  <script type="text/javascript" src="HomeScript.js"></script>
+  <title>Confined</title>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="wrap">
+    <div class="title">
+      <h1>CONFINED...</h1>
+    </div>
+    <div class="border"></div>
+    <div class="ui">
+      <form action="../Game/GamePage.html">
+        <input id="name" type="text" placeholder="Enter Username...">
+        <input type="submit" value="Play" onclick="return getName();">
+      </form>
+    </div>
+
+  </div>
+</body>
 </html>
