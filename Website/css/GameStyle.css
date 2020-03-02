@@ -13,7 +13,7 @@ body, html {
   background-color: #111E24;
 }
 div .textUi{
-  background-color: #111E24;
+  background-color: grey;
   width: 65%;
   height: 100%;
   float: left;
@@ -22,13 +22,31 @@ div .textUi{
   border-style: inset;
   padding: 1.5%;
 }
+div #time{
+  width: 100%;
+  height: 4.5%;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 2vw;
+  padding: 3px;
+}
+div .timeLeft{
+  width: 80%;
+  height: 100%;
+  background-color: blue;
+  border-radius: 2vw;
+  float: left;
+  text-align: center;
+  margin: 0 auto;
+}
 #gameText{
-  height: 89%;
+  background-color: #111E24;
+  height: 90%;
   width: 100%;
   border-radius: 1vw;
   border-style: outset;
   padding: 1%;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   color: white;
   font-family: monospace;
   overflow: scroll;
@@ -42,7 +60,6 @@ div .input{
   justify-content: center;
 }
 div .inv{
-  background-color: red;
   width: 34%;
   height: 100%;
   float: right;
@@ -64,5 +81,5 @@ input[type=text] {
 
 input[type=text]:focus {
     width: 100%;
-    height: 100%;
+    height: 80%;
 }
