@@ -1,26 +1,30 @@
 var name = window.localStorage.getItem('userName');
 var start = [
   name + "... ",
-  "<p>You wake up in a <strong>dim</strong>, obscure room and gloomy room. </p>",
+  "<p>You wake up in a <strong>dim</strong>, obscure, gloomy room. </p>",
   "<p>You have no recollection of how you ended up here, yet here you are. </p>",
   "<p>You have no recollection of why you are here, yet here you are. </p>",
   "As you start to come to, you take notice of your surroundings.",
   "<p>On the floor in front of you, there is a carving, it spells, <strong>\"Escape\"</strong>...</p>",
-  "<p>You now feel eerie, like a presence of evil possesses the room. <strong>There is no God here.</strong></p>",
+  "<p>You now feel eerie, like a presence of evil possesses the room.</p>",
+  "<p><strong>There is no God here.</strong></p>",
   "<p>...</p>",
-  "<p>In the room there is cabinet.</p>",
-  "<p>There is a <strong>cupboard</strong> in the room.</p>",
+  "<p>In the room there is <strong>cabinet</strong>.</p>",
+  "<p>There is a <strong>wardrobe</strong> in the room.</p>",
+  "<p>A tall, dirty <strong>mirror</strong> lingers hunched.</p>",
+  "<p>Fixed to the ceiling corner is a flashing red light...</p>",
+  "<p>You are being watched...</p>",
   "<p>There is also a <strong>door</strong> in the room, as you may presume, this is locked with a <strong>padlock</strong>.</p>",
   "<p>The objective is to <strong>unlock</strong> this <strong>door</strong> and escape confinement!</p>"
 ];
 
 var locs = {
-  "cupboard":{
-    "desc": "<p>In the cupboard you find a piece of paper with the number <strong>85</strong> scrawled on it.</p>"
+  "wardrobe":{
+    "desc": "<p>In the wardrobe you find a piece of paper.</p>"
   },
   "cabinet":{
-    "desc": "<p>There are <strong>3 draws</strong> in the Cabinet, <strong>A, B,</strong> and drawer <strong>C</strong>.\
-            There is also a <strong>framed picture</strong> on the cabinet.</p>"
+    "desc": "<p>There are <strong>3 drawers</strong> in the Cabinet, <strong>A, B,</strong> and drawer <strong>C</strong>.\
+    There is also a <strong>framed picture</strong> on the cabinet.</p>"
   },
   "drawerA":{
     "desc": "<p>In drawer A you find a word carved into the wood, it reads <strong>\"To Sum\"</strong>. </p>"
@@ -29,115 +33,196 @@ var locs = {
     "desc": "<p>In drawer B you find a <strong>calculator</strong>, it feels light, you feel something on the back of the calculator.</p>"
   },
   "drawerC":{
-    "desc": "<p>In draw C you find a card with the letters <strong>LVI</strong> embossed into it.</p>"
+    "desc": "<p>In draw C you find a thicker, more dense peice of paper, perhaps card?</p>"
   },
-  "calculator":{
-    "desc": "<p>The calculator does not turn on, on the back you notice a <strong>battery is missing</strong> from its socket</p>"
+  "mirror":{
+    "desc": "<p>Beneath the mirror is a screwdriver covered in rust.</p>"
   }
 
   // Add another location
-
 }
+
+var help = ["search", "take", "inspect", "look", "combine", "help"]
 var invalid = "<p><i>>Invalid Command</i></p>";
 
 var inv = [];
 
 var currentLoc = "";
 
+function showHelp() {
+  $('#gameText').append("<p>Commands that can be used:</p>");
+  $('#gameText').append("<p>");
+  for(i=0; i<help.length; i++){
+    $('#gameText').append("<li>"+help[i]+"</li>");
+  }
+  $('#gameText').append("</p>");
+  $('input').val('');
+}
+
 function locCheck(request){
   if(currentLoc === request){
     $('#gameText').append("<p>I can't do that...</p>");
   }
-   else{
-     $('#gameText').append("<p>" + locs[request].desc + "</p>");
-     currentLoc = request;
-     $('input').val('');
-   }
-}
-
-
-/*
-function goToSwitch(command){
-  switch(command){
-    case "mirror":
-      goTo("mirror");
-      break;
-    case "chair":
-      goTo("chair");
-      break;
-    default:
-      $('#gameText').append(invalid);
+  else{
+    $('#gameText').append("<p>" + locs[request].desc + "</p>");
+    currentLoc = request;
+    $('input').val('');
   }
 }
-
-
-function useSwitch(command){
-  switch(command){
-    case "torch":
-      use("torch");
-      break;
-    default:
-      $('#gameText').append("<p><i>>Invalid Command</i></p>");
-  }
-}
-*/
 
 function takeSwitch(item) {
-  switch (item) {
-    case "calculator":
-      inv.push("calculator");
-      break;
-
-    case "paper":
-      inv.push("calculator");
-      break;
-
-    case "card":
-      inv.push("card");
-      break;
-
-    case "battery":
-      inv.push("battery");
-      break;
-
-    default:
+  if(inv.includes(item)){
+    $('#gameText').append("<p>-"+item+" already in invetory</p>");
   }
-    $('#gameText').append("<p>-"+item+" placed in inventory.</p>");s
-    $('input').val('');
+  else{
+    switch (item) {
+      case "":
+      $('#gameText').append(invalid);
+      break;
+
+      case "calculator":
+      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+      inv.push("calculator");
+      break;
+
+      case "paper":
+      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+      inv.push("paper");
+      $('#img1').prepend('<img src="../Images/paper.png" />');
+      break;
+
+      case "card":
+      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+      inv.push("card");
+      $('#img4').prepend('<img src="../Images/paper.png" />');
+      break;
+
+      case "picture":
+      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+      inv.push("picture");
+      break;
+
+      case "battery":
+      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+      inv.push("battery");
+      $('#img6').prepend('<img src="../Images/battery.png" />');
+      break;
+
+      case "screwdriver":
+      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+      inv.push("screwdriver");
+      $('#img4').prepend('<img src="../Images/screwdriver.png" />');
+      break;
+
+      default:
+      $('#gameText').append(invalid);
+    }
+  }
+  $('input').val('');
 }
 
 function searchSwitch(command){
   switch(command){
-    case "cupboard":
-      locCheck("cupboard");
-      break;
+    case "wardrobe":
+    locCheck("wardrobe");
+    break;
 
     case "cabinet":
-      locCheck("cabinet");
-      break;
+    locCheck("cabinet");
+    break;
 
     case "a":
-      locCheck("drawerA");
-      break;
+    locCheck("drawerA");
+    break;
 
     case "b":
-      locCheck("drawerB");
-      break;
+    locCheck("drawerB");
+    break;
 
     case "b":
-      locCheck("drawerB");
-      break;
+    locCheck("drawerB");
+    break;
 
     case "c":
-      locCheck("drawerC");
-      break;
+    locCheck("drawerC");
+    break;
 
-    case "calculator":
-      locCheck("calculator");
-      break;
+    case "mirror":
+    locCheck("mirror");
+    break;
 
     default:
-      $('#gameText').append(invalid);
+    $('#gameText').append(invalid);
+  }
+}
+
+function inspectSwitch(item) {
+  switch (item) {
+    case "calculator":
+    $('#gameText').append("<p>The calculator does not turn on, on the\
+    back you notice a <strong>battery is missing</strong> from its socket.</p>");
+    break;
+
+    case "paper":
+    $('#gameText').append("<p>The paper has the number <strong>85</strong> scrawled on it.</p>");
+    break;
+
+    case "card":
+    $('#gameText').append("<p>The playing card has the the letters <strong>LVI</strong> embossed into it.</p>");
+    break;
+
+    case "picture":
+    $('#gameText').append("<p>The picture denotes a picture of a married couple on their wedding day, \
+    their faces have been <strong>blackened out</strong>. Their appears to be some <strong>writing<\strong> \
+    in the corner of the picture, but the frame fastened with screws is blocking it.</p>"); //implement tools to remove frame
+    break;
+
+    case "door":
+    $('#gameText').append("<p>The door is locked with a <strong>padlock</strong>. You notice the padlock is \
+    a combination of <strong>numbers</strong>, the correct combination must <strong>open the door</strong>. \
+    There is also a note on the door, it reads: \"<strong>Beneath</strong> that of which we hang our \
+    <strong>costumes</strong>, lies the final piece of the puzzle.\"</p><p>What could this mean? </p>");
+    break;
+
+    case "battery":
+    $('#gameText').append("<p>It looks like it may <strong>fit somewhere</strong>.</p>");
+    break;
+
+    case "screwdriver":
+    $('#gameText').append("<p>The scewdriver is in bad condition but seems <strong>usable</strong>.</p>");
+    break;
+
+    default:
+    $('#gameText').append(invalid);
+  }
+  $('input').val('');
+}
+
+function lookSwitch(place) {
+  switch (place) {
+    case "wardrobe":
+    $('#gameText').append("<p>Here you find a <strong>battery</strong>.</p>");
+    break;
+
+    case "mirror":
+    $('#gameText').append("<p>The mirror is in bad condition, however, you can see that your once clothes,\
+    are now torn to rags and socked in an indistinguishable substance. Your face is badly cut. <strong>YOU \
+    HAVE TO ESCAPE!</strong></p>");
+    break;
+
+    default:
+    $('#gameText').append(invalid);
+  }
+  $('input').val('');
+}
+
+function combineSwitch(item1, item2) {
+  switch (expression) {
+    case expression:
+
+      break;
+    default:
+
   }
 }
 
@@ -148,41 +233,40 @@ $(document).ready(function(){
       $('#gameText').append(start[index]);
       index++;
     }else
-      return;
-  }, 1500); //Adjust Wait Time between into lines
-
+    return;
+  }, 0); //Adjust Wait Time between into lines
+  showHelp();
   $(document).on('keypress',function(e) {
     if(e.which === 13 && $('#userInput').is(':focus')) {
       var input = $('#userInput').val().toLowerCase();
       var inputSplit = input.split(" ");
       switch(inputSplit[0]){
         case "search":
-          searchSwitch(inputSplit[inputSplit.length - 1]);
-          break;
+        searchSwitch(inputSplit[inputSplit.length - 1]);
+        break;
 
         case "take":
-          takeSwitch(inputSplit[inputSplit.length - 1]);
-          break;
+        takeSwitch(inputSplit[inputSplit.length - 1]);
+        break;
+
+        case "inspect":
+        inspectSwitch(inputSplit[inputSplit.length - 1]);
+        break;
+
+        case "look":
+        lookSwitch(inputSplit[inputSplit.length - 1]);
+        break;
+
+        case "combine":
+        combineSwitch(inputSplit[1],inputSplit[inputSplit.length - 1]);
+        break;
+
+        case "help":
+        showHelp();
+        break;
 
         default: $('#gameText').append(invalid);
       }
-
-      // if(inputSplit[0] === "search"){
-      //
-      // }
-      // else if (inputSplit[0] === "use") {
-      //   useSwitch(inputSplit[inputSplit.length - 1]);
-      // }
-      //
-      // else if (inputSplit[0] === "pickup") {
-      //   useSwitch(inputSplit[inputSplit.length - 1]);
-      // }
-      //
-      // else{
-      //   $('#gameText').append("<p><i>>Invalid Command</i></p>");
-      //
-      // }
-
     }
   });
 })
