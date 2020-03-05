@@ -4,7 +4,7 @@ var start = [
   "<p>You wake up in a <strong>dim</strong>, obscure, gloomy room. </p>",
   "<p>You have no recollection of how you ended up here, yet here you are. </p>",
   "<p>You have no recollection of why you are here, yet here you are. </p>",
-  "As you start to come to, you take notice of your surroundings.",
+  "<p>As you start to come to, you take notice of your surroundings.</p>",
   "<p>On the floor in front of you, there is a carving, it spells, <strong>\"Escape\"</strong>...</p>",
   "<p>You now feel eerie, like a presence of evil possesses the room.</p>",
   "<p><strong>There is no God here.</strong></p>",
@@ -48,6 +48,11 @@ var invalid = "<p><i>>Invalid Command</i></p>";
 var inv = [];
 
 var currentLoc = "";
+
+function updateScroll(){
+    var element = document.getElementById("gameText");
+    element.scrollTop = element.scrollHeight;
+}
 
 function showHelp() {
   $('#gameText').append("<p>Commands that can be used:</p>");
@@ -94,7 +99,6 @@ function takeSwitch(item) {
       case "card":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("card");
-      $('#img4').prepend('<img src="../Images/paper.png" />');
       break;
 
       case "picture":
@@ -228,14 +232,19 @@ function combineSwitch(item1, item2) {
 
 $(document).ready(function(){
   var index = 0;
+  setInterval(updateScroll,1000);
   setInterval(function(){
     if(index < start.length){
       $('#gameText').append(start[index]);
       index++;
-    }else
+    }
+    else if (index == start.length) {
+      showHelp();
+      index++;
+    }
     return;
-  }, 0); //Adjust Wait Time between into lines
-  showHelp();
+  }, 1500); //Adjust Wait Time between into lines
+
   $(document).on('keypress',function(e) {
     if(e.which === 13 && $('#userInput').is(':focus')) {
       var input = $('#userInput').val().toLowerCase();
