@@ -49,6 +49,8 @@ var inv = [];
 
 var currentLoc = "";
 
+var calcTurnedOn = false;
+
 function updateScroll(){
     var element = document.getElementById("gameText");
     element.scrollTop = element.scrollHeight;
@@ -61,7 +63,6 @@ function showHelp() {
     $('#gameText').append("<li>"+help[i]+"</li>");
   }
   $('#gameText').append("</p>");
-  $('input').val('');
 }
 
 function locCheck(request){
@@ -88,6 +89,7 @@ function takeSwitch(item) {
       case "calculator":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("calculator");
+      $('#img2').prepend('<img src="../Images/CalculatorOff.png" />');
       break;
 
       case "paper":
@@ -163,8 +165,14 @@ function searchSwitch(command){
 function inspectSwitch(item) {
   switch (item) {
     case "calculator":
-    $('#gameText').append("<p>The calculator does not turn on, on the\
-    back you notice a <strong>battery is missing</strong> from its socket.</p>");
+      if(!calcTurnedOn){
+        $('#gameText').append("<p>The calculator does not turn on, on the\
+        back you notice a <strong>battery is missing</strong> from its socket.</p>");
+      }
+      else{
+        $('#gameText').append("<p>The calculator is on and is ready to use</p>");
+        $('#gameText').append("<p>Enter a sum: </p>");
+      }
     break;
 
     case "paper":
@@ -182,6 +190,13 @@ function inspectSwitch(item) {
     break;
 
     case "door":
+    $('#gameText').append("<p>The door is locked with a <strong>padlock</strong>. You notice the padlock is \
+    a combination of <strong>numbers</strong>, the correct combination must <strong>open the door</strong>. \
+    There is also a note on the door, it reads: \"<strong>Beneath</strong> that of which we hang our \
+    <strong>costumes</strong>, lies the final piece of the puzzle.\"</p><p>What could this mean? </p>");
+    break;
+
+    case "padlock":
     $('#gameText').append("<p>The door is locked with a <strong>padlock</strong>. You notice the padlock is \
     a combination of <strong>numbers</strong>, the correct combination must <strong>open the door</strong>. \
     There is also a note on the door, it reads: \"<strong>Beneath</strong> that of which we hang our \
@@ -214,6 +229,12 @@ function lookSwitch(place) {
     HAVE TO ESCAPE!</strong></p>");
     break;
 
+    case "door":
+    $('#gameText').append("<p>The door is locked with a padlock. You notice the padlock is a combination of \
+    numbers, the correct combination must open the door. There is also a note on the door, it reads: \" <strong>Beneath</strong> \
+    that of which we hang our <strong>costumes</strong>, lies the final piece of the puzzle.\" What could this mean?</p>");
+    break;
+
     default:
     $('#gameText').append(invalid);
   }
@@ -221,13 +242,37 @@ function lookSwitch(place) {
 }
 
 function combineSwitch(item1, item2) {
-  switch (expression) {
-    case expression:
-
-      break;
-    default:
-
+  var noItems = "<p>You don't have the items for that action.</p>";
+  if((item1 == "battery" && item2 == "calculator")||
+    (item1 == "calculator" && item2 == "battery")){
+    if(inv.includes("battery") && inv.includes("calculator")){
+      $('#gameText').append("<p>The calculator has turned on.</p>");
+      calcTurnedOn = true;
+      let x = inv.indexOf("battery");
+      let y = inv.indexOf("calculator");
+      inv.splice(x, 1);
+      inv.splice(y, 1);
+      // let elementToBeRemoved = document.getElementById('img2');
+      // (elementToBeRemoved).parentNode.removeChild(elementToBeRemoved);
+      // elementToBeRemoved = document.getElementById('img6');
+      // elementToBeRemoved.parentNode.removeChild('elementToBeRemoved');
+    }
+    else { $('#gameText').append(noItems);}
   }
+  else if((item1 == "screwdriver" && item2 == "picture")||
+    (item1 == "picture" && item2 == "screwdriver")){
+    if(inv.includes("picture") && inv.includes("screwdriver")){
+      $('#gameText').append("<p>The picture has been removed from its frame.</p>");
+      let x = inv.indexOf("picture");
+      let y = inv.indexOf("screwdriver");
+      inv.splice(x, 1);
+      inv.splice(y, 1);
+    }
+    else { $('#gameText').append(noItems);}
+  }
+  else { $('#gameText').append(noItems);}
+  $('input').val('');
+
 }
 
 $(document).ready(function(){
