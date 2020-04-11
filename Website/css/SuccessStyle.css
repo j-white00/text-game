@@ -6,13 +6,6 @@ body, html {
   height: 100%;
   background-color: #111E24;
 }
-.bg {
-  background-image: url("../Images/HomeBackground.jpg");
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .wrap{
   position: fixed;
   top: 55%;

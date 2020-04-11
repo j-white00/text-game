@@ -322,7 +322,7 @@ $(document).ready(function(){
         $('#gameText').append("<p>The padlock breaks open and the once fastend door, now swings freely...</p>");
         $('#gameText').append("<p><strong>YOU HAVE ESCAPED <u>CONFINMENT</u>...</strong></p>");
         setTimeout(function redirect() {
-          window.location = '../Pages/SuccessPage.html';
+          window.location = '../Pages/SuccessVideo.html';
         }, 3000);
       }
       else if(isNaN(inputSplit[0]) == false){
