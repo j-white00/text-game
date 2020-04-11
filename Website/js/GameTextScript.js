@@ -50,6 +50,9 @@ var inv = [];
 var currentLoc = "";
 
 var calcTurnedOn = false;
+var pictureOut = false;
+var takenPic = false;
+var takenBat = false;
 
 function updateScroll(){
     var element = document.getElementById("gameText");
@@ -89,7 +92,7 @@ function takeSwitch(item) {
       case "calculator":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("calculator");
-      $('#img2').prepend('<img src="../Images/CalculatorOff.png" />');
+      $('#img2').prepend('<img src="../Images/calculatorOFF.png" />');
       break;
 
       case "paper":
@@ -101,17 +104,32 @@ function takeSwitch(item) {
       case "card":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("card");
+      $('#img3').prepend('<img src="../Images/card.png" />');
       break;
 
       case "picture":
-      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
-      inv.push("picture");
+        if(!takenPic){
+          $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+          inv.push("picture");
+          $('#img5').prepend('<img src="../Images/pictureIN.png" />');
+          takenPic = true;
+        }
+        else{
+            $('#gameText').append("<p>You have already taken this item.</p>");
+        }
+
       break;
 
       case "battery":
-      $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
-      inv.push("battery");
-      $('#img6').prepend('<img src="../Images/battery.png" />');
+        if(!takenBat){
+          $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
+          inv.push("battery");
+          $('#img6').prepend('<img src="../Images/battery.png" />');
+          takenBat = true;
+        }
+        else{
+            $('#gameText').append("<p>You have already taken this item.</p>");
+        }
       break;
 
       case "screwdriver":
@@ -171,7 +189,7 @@ function inspectSwitch(item) {
       }
       else{
         $('#gameText').append("<p>The calculator is on and is ready to use</p>");
-        $('#gameText').append("<p>Enter a sum: </p>");
+        $('#gameText').append("<p>Enter a sum:</p>");
       }
     break;
 
@@ -184,9 +202,14 @@ function inspectSwitch(item) {
     break;
 
     case "picture":
-    $('#gameText').append("<p>The picture denotes a picture of a married couple on their wedding day, \
-    their faces have been <strong>blackened out</strong>. Their appears to be some <strong>writing<\strong> \
-    in the corner of the picture, but the frame fastened with screws is blocking it.</p>"); //implement tools to remove frame
+      if(!pictureOut){
+        $('#gameText').append("<p>The picture denotes a picture of a married couple on their wedding day, \
+        their faces have been <strong>blackened out</strong>. Their appears to be some <strong>writing<\strong> \
+        in the corner of the picture, but the frame fastened with screws is blocking it.</p>");
+      }
+      else{
+        $('#gameText').append("<p>On further inspection of the photo, the writing spells out <strong>\"twenty-three\"</strong></p>");
+      }
     break;
 
     case "door":
@@ -197,10 +220,9 @@ function inspectSwitch(item) {
     break;
 
     case "padlock":
-    $('#gameText').append("<p>The door is locked with a <strong>padlock</strong>. You notice the padlock is \
-    a combination of <strong>numbers</strong>, the correct combination must <strong>open the door</strong>. \
-    There is also a note on the door, it reads: \"<strong>Beneath</strong> that of which we hang our \
-    <strong>costumes</strong>, lies the final piece of the puzzle.\"</p><p>What could this mean? </p>");
+    $('#gameText').append("<p>The correct combination of <strong>three</strong> must be entered to \
+    unlock the door.</p>");
+    $('#gameText').append("<p>Enter Combination: </p>");
     break;
 
     case "battery":
@@ -252,10 +274,9 @@ function combineSwitch(item1, item2) {
       let y = inv.indexOf("calculator");
       inv.splice(x, 1);
       inv.splice(y, 1);
-      // let elementToBeRemoved = document.getElementById('img2');
-      // (elementToBeRemoved).parentNode.removeChild(elementToBeRemoved);
-      // elementToBeRemoved = document.getElementById('img6');
-      // elementToBeRemoved.parentNode.removeChild('elementToBeRemoved');
+      $("#img2").empty();
+      $("#img6").empty();
+      $('#img2').prepend('<img src="../Images/calculatorON.png" />');
     }
     else { $('#gameText').append(noItems);}
   }
@@ -263,21 +284,24 @@ function combineSwitch(item1, item2) {
     (item1 == "picture" && item2 == "screwdriver")){
     if(inv.includes("picture") && inv.includes("screwdriver")){
       $('#gameText').append("<p>The picture has been removed from its frame.</p>");
+      pictureOut = true;
       let x = inv.indexOf("picture");
       let y = inv.indexOf("screwdriver");
       inv.splice(x, 1);
       inv.splice(y, 1);
+      $("#img5").empty();
+      $('#img5').prepend('<img src="../Images/pictureOUT.png" />');
+
     }
     else { $('#gameText').append(noItems);}
   }
   else { $('#gameText').append(noItems);}
   $('input').val('');
-
 }
 
 $(document).ready(function(){
   var index = 0;
-  setInterval(updateScroll,1000);
+  setInterval(updateScroll,0);
   setInterval(function(){
     if(index < start.length){
       $('#gameText').append(start[index]);
@@ -292,34 +316,59 @@ $(document).ready(function(){
 
   $(document).on('keypress',function(e) {
     if(e.which === 13 && $('#userInput').is(':focus')) {
-      var input = $('#userInput').val().toLowerCase();
+      var input = $('#userInput').val();
       var inputSplit = input.split(" ");
-      switch(inputSplit[0]){
-        case "search":
-        searchSwitch(inputSplit[inputSplit.length - 1]);
-        break;
+      if(inputSplit[0] == 164){
+        $('#gameText').append("<p>The padlock breaks open and the once fastend door, now swings freely...</p>");
+        $('#gameText').append("<p><strong>YOU HAVE ESCAPED <u>CONFINMENT</u>...</strong></p>");
+        setTimeout(function redirect() {
+          window.location = '../Pages/SuccessPage.html';
+        }, 3000);
+      }
+      else if(isNaN(inputSplit[0]) == false){
+        if(calcTurnedOn){
+          var res = eval(input);
+          $('#gameText').append("The calculcator displays <strong><u>"+res+"</strong></u>");
+          $('input').val('');
+        }
+        else{
+          if(inv.includes("calculator")){
+            $('#gameText').append("The calculator needs <strong>power</strong> to preform that action.");
+          }
+          else{
+            $('#gameText').append("You need a <strong>calculator</strong> to do that.");
+          }
+        }
+      }
+      else{
+        input = $('#userInput').val().toLowerCase();
+        switch(inputSplit[0]){
+          case "search":
+          searchSwitch(inputSplit[inputSplit.length - 1]);
+          break;
 
-        case "take":
-        takeSwitch(inputSplit[inputSplit.length - 1]);
-        break;
+          case "take":
+          takeSwitch(inputSplit[inputSplit.length - 1]);
+          break;
 
-        case "inspect":
-        inspectSwitch(inputSplit[inputSplit.length - 1]);
-        break;
+          case "inspect":
+          inspectSwitch(inputSplit[inputSplit.length - 1]);
+          break;
 
-        case "look":
-        lookSwitch(inputSplit[inputSplit.length - 1]);
-        break;
+          case "look":
+          lookSwitch(inputSplit[inputSplit.length - 1]);
+          break;
 
-        case "combine":
-        combineSwitch(inputSplit[1],inputSplit[inputSplit.length - 1]);
-        break;
+          case "combine":
+          combineSwitch(inputSplit[1],inputSplit[inputSplit.length - 1]);
+          break;
 
-        case "help":
-        showHelp();
-        break;
+          case "help":
+          showHelp();
+          break;
 
-        default: $('#gameText').append(invalid);
+          default: $('#gameText').append(invalid);
+        }
       }
     }
   });

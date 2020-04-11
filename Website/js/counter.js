@@ -1,8 +1,8 @@
-
-
+var secRemain = 0;
+window.localStorage.setItem('timeRemaining', secRemain);
 
   setTimeout(function () {
-    var secRemain = 300;
+    secRemain = 300;
     setInterval(function(){
       if(secRemain > 0){
         let width = (secRemain/3)+"%";
@@ -16,11 +16,10 @@
           sec = "0"+sec;
         }
         document.getElementById('timeText').innerHTML = "Oxygen: "+min+":"+sec;
-        //document.getElementById('timeText').setAttribute("style","left:50%");
         secRemain--;
       }
       else if (secRemain === 0) {
-        window.location = '../Pages/GameOverPage.html';
+        window.location = '../Pages/FailPage.html';
       }
       return;
     }, 1000);//1000
