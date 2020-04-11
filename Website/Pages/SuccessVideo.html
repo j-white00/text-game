@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>You Escaped!</title>
+    <style media="screen">
+      * {
+          box-sizing: border-box;
+          margin: 0 auto;
+      }
+      body, html {
+        height: 100%;
+        background-color: black;
+      }
+    </style>
+    <script type="text/javascript">
+      setTimeout(function(){
+        window.location = '../Pages/SuccessPage.html'}
+        , 10000);
+    </script>
+  </head>
+  <body>
+    <video id="doorVideo" width="100%" height="100%" controls muted autoplay>
+      <source src="../Images/successVid.mp4" type="video/mp4">
+    </video>
+  </body>
+</html>
