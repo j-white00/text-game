@@ -1,4 +1,5 @@
 var name = window.localStorage.getItem('userName');
+var moves = 0;
 var start = [
   name + "... ",
   "<p>You wake up in a <strong>dim</strong>, obscure, gloomy room. </p>",
@@ -316,6 +317,8 @@ $(document).ready(function(){
 
   $(document).on('keypress',function(e) {
     if(e.which === 13 && $('#userInput').is(':focus')) {
+      moves++;
+      window.localStorage.setItem('userMoves', moves);
       var input = $('#userInput').val();
       var inputSplit = input.split(" ");
       if(inputSplit[0] == 164){

@@ -1,10 +1,9 @@
 var secRemain = 0;
-window.localStorage.setItem('timeRemaining', secRemain);
-
   setTimeout(function () {
     secRemain = 300;
     setInterval(function(){
       if(secRemain > 0){
+        window.localStorage.setItem('timeRemaining', secRemain);
         let width = (secRemain/3)+"%";
         document.getElementById('timeLeft').setAttribute("style","width:"+width);
         let min = Math.floor(secRemain/60);
