@@ -8,8 +8,16 @@
 </head>
 <body>
   <div id="wrapper">
-
     <div class="textUi">
+      <div id="audio">
+        <div id="audioHeader">
+          <h2>Audio Menu</h2>
+          <button type="button" name="button" id="audioClose" onclick="hideAudio()">Close</button>
+        </div>
+        <audio id="audioPlayer" controls autoplay>
+        <source src="../Images/Game_Soundtrack.mp3" type="audio/mp3">
+        </audio>
+      </div>
       <div id="time">
         <p id="timeText"></p>
         <div id="timeLeft">

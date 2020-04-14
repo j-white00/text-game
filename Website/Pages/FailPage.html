@@ -4,10 +4,21 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/EndStyle.css">
+    <link rel="stylesheet" href="../css/FailStyle.css">
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/FailPageScript.js"></script>
   </head>
   <body>
-    <h1>GAME OVER</h1>
-
+    <div class="wrap">
+      <div id="title">
+        <h2>You have ran out</h2>
+      </div>
+      <div id="bigTitle">
+      </div>
+      <div class="info">
+          <p id="stats"></p>
+          <input id="playAgain" type="submit" value="Play Again" onclick="redirect()">
+      </div>
+    </div>
   </body>
 </html>

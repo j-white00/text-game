@@ -43,7 +43,7 @@ var locs = {
   // Add another location
 }
 
-var help = ["search", "take", "inspect", "look", "combine", "help"]
+var help = ["search", "take", "inspect", "look", "combine", "help", "audio"]
 var invalid = "<p><i>>Invalid Command</i></p>";
 
 var inv = [];
@@ -54,6 +54,10 @@ var calcTurnedOn = false;
 var pictureOut = false;
 var takenPic = false;
 var takenBat = false;
+
+function hideAudio() {
+    document.getElementById("audio").style.visibility = "hidden";
+}
 
 function updateScroll(){
     var element = document.getElementById("gameText");
@@ -368,6 +372,11 @@ $(document).ready(function(){
 
           case "help":
           showHelp();
+          break;
+
+          case "audio":
+          document.getElementById("audio").style.visibility = "visible";
+          $('input').val('');
           break;
 
           default: $('#gameText').append(invalid);
