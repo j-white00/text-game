@@ -3,6 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/HomeStyle.css">
+  <script src="../js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="../js/HomeScript.js"></script>
   <title>Confined</title>
 </head>
@@ -13,7 +14,19 @@
       <h1>CONFINED...</h1>
     </div>
     <div class="border"></div>
-    <div class="ui">
+    <div id="age">
+      <input id="ageBtn" type="submit" value="Confirm Your Age" onclick="confirmAge()"></input>
+    </div>
+      <h1 id="notOfAge">You are unable to play this game.</h1>
+    <div id="ui">
+      <div id="slider">
+        <label class="switch">
+          <input type="checkbox" onclick="modeSlider()">
+          <span class="slider">
+            <span id="modeText"></span>
+          </span>
+        </label>
+      </div>
       <form action="../Pages/GamePage.html">
         <input id="name" type="text" placeholder="Enter Username...">
         <input type="submit" value="Play" onclick="return getName();">

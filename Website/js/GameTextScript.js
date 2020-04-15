@@ -1,4 +1,5 @@
 var name = window.localStorage.getItem('userName');
+var darkMode = window.localStorage.getItem('darkMode');
 var moves = 0;
 var start = [
   name + "... ",
@@ -304,7 +305,21 @@ function combineSwitch(item1, item2) {
   $('input').val('');
 }
 
+function changeColor() {
+  if(darkMode === "false"){
+    $("body").css("background-color", "white");
+    $("#gameText").css("color", "black");
+    $("#gameText").css("border", "solid black");
+    $("#gameText").css("background-color", "white");
+    $(".inv").css("border", "solid black");
+    $(".textUi").css("border", "solid black");
+    $(".slot").css("border", "solid black");
+    $("#audio").css("background-color", "grey");
+  }
+}
+
 $(document).ready(function(){
+  changeColor();
   var index = 0;
   setInterval(updateScroll,0);
   setInterval(function(){

@@ -21,6 +21,6 @@ var secRemain = 0;
         window.location = '../Pages/FailPage.html';
       }
       return;
-    }, 1000);//1000
+    }, 1000);//1000 between each line
 
-  }, 25000)//25000)
+  }, 25000)//25000 seconds intro)
