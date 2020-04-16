@@ -7,11 +7,11 @@ var timeElapsed = 300 - timeLeft;
 setTimeout(function () {
   document.getElementById("title").style.borderRight = "none";
   $('#bigTitle').append("<h1>of Oxygen...</h1>");
-}, 4000);
+}, 2500);
 
 setTimeout(function () {
   document.getElementById("playAgain").style.visibility = "visible";
-}, 6000);
+}, 4000);
 
 function getFormattedTime(time) {
   let min = Math.floor(time/60);

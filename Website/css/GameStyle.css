@@ -9,6 +9,7 @@
   margin: 0;
   padding: 1%;
 }
+
 body, html {
   height: 100%;
   background-color: #111E24;
@@ -19,6 +20,10 @@ div #audioHeader{
 }
 #audioClose{
   width: 30%;
+  background-color: #1E8470;
+  font-size: 2vh;
+  color: white;
+  border-radius: 10px;
 }
 #audioPlayer{
   margin: 0 auto;
@@ -33,7 +38,7 @@ div #audio{
   width: 35%;
   height: 15%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 10;
   background: white;
 }
 div .textUi{

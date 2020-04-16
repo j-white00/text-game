@@ -321,15 +321,16 @@ function changeColor() {
 $(document).ready(function(){
   changeColor();
   var index = 0;
-  setInterval(updateScroll,0);
   setInterval(function(){
     if(index < start.length){
       $('#gameText').append(start[index]);
       index++;
+      updateScroll();
     }
     else if (index == start.length) {
       showHelp();
       index++;
+      updateScroll();
     }
     return;
   }, 1500); //Adjust Wait Time between into lines
@@ -342,7 +343,8 @@ $(document).ready(function(){
       var inputSplit = input.split(" ");
       if(inputSplit[0] == 164){
         $('#gameText').append("<p>The padlock breaks open and the once fastend door, now swings freely...</p>");
-        $('#gameText').append("<p><strong>YOU HAVE ESCAPED <u>CONFINMENT</u>...</strong></p>");
+        $('#gameText').append("<p><strong>YOU HAVE ESCAPED <u>CONFINEMENT</u>...</strong></p>");
+        updateScroll();
         setTimeout(function redirect() {
           window.location = '../Pages/SuccessVideo.html';
         }, 3000);
@@ -351,14 +353,17 @@ $(document).ready(function(){
         if(calcTurnedOn){
           var res = eval(input);
           $('#gameText').append("The calculcator displays <strong><u>"+res+"</strong></u>");
+          updateScroll();
           $('input').val('');
         }
         else{
           if(inv.includes("calculator")){
             $('#gameText').append("The calculator needs <strong>power</strong> to preform that action.");
+            updateScroll();
           }
           else{
             $('#gameText').append("You need a <strong>calculator</strong> to do that.");
+            updateScroll();
           }
         }
       }
@@ -367,34 +372,42 @@ $(document).ready(function(){
         switch(inputSplit[0]){
           case "search":
           searchSwitch(inputSplit[inputSplit.length - 1]);
+          updateScroll();
           break;
 
           case "take":
           takeSwitch(inputSplit[inputSplit.length - 1]);
+          updateScroll();
           break;
 
           case "inspect":
           inspectSwitch(inputSplit[inputSplit.length - 1]);
+          updateScroll();
           break;
 
           case "look":
           lookSwitch(inputSplit[inputSplit.length - 1]);
+          updateScroll();
           break;
 
           case "combine":
           combineSwitch(inputSplit[1],inputSplit[inputSplit.length - 1]);
+          updateScroll();
           break;
 
           case "help":
           showHelp();
+          updateScroll();
           break;
 
           case "audio":
           document.getElementById("audio").style.visibility = "visible";
           $('input').val('');
+          updateScroll();
           break;
 
           default: $('#gameText').append(invalid);
+          updateScroll();
         }
       }
     }
