@@ -312,7 +312,9 @@ function changeColor() {
     $("#gameText").css("border", "solid black");
     $("#gameText").css("background-color", "white");
     $(".inv").css("border", "solid black");
+    $(".inv").css("background-color", "grey");
     $(".textUi").css("border", "solid black");
+    $(".slot").css("background-color", "white");
     $(".slot").css("border", "solid black");
     $("#audio").css("background-color", "grey");
   }
