@@ -122,13 +122,12 @@ input[type=submit]:active {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-/* Light and Dark Mode Switches */
+/* Light and Dark Mode Switches using checkbox and some JS to update modeText*/
 #slider{
   width: 100%;
   height: auto;
   padding-bottom: 3%;
 }
-/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -136,7 +135,6 @@ input[type=submit]:active {
   height: 3.5vh;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
@@ -156,7 +154,6 @@ input[type=submit]:active {
     justify-content: center;
   }
 
-/* The slider */
 .slider {
   border-radius: 15px;
   position: absolute;
