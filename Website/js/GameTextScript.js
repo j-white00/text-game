@@ -204,7 +204,7 @@ function inspectSwitch(item) {
     break;
 
     case "card":
-    $('#gameText').append("<p>The playing card has the the letters <strong>LVI</strong> embossed into it.</p>");
+    $('#gameText').append("<p>The card has the the number <strong>56</strong> embossed into it.</p>");
     break;
 
     case "picture":
