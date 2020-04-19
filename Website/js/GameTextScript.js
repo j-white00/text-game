@@ -98,26 +98,26 @@ function takeSwitch(item) {
       case "calculator":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("calculator");
-      $('#img2').prepend('<img src="../Images/calculatorOFF.png" />');
+      $('#img2').prepend('<img src="../Images/calculatorOFF.png" alt="Calculator without Power"/>');
       break;
 
       case "paper":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("paper");
-      $('#img1').prepend('<img src="../Images/paper.png" />');
+      $('#img1').prepend('<img src="../Images/paper.png" alt="Torn paper with 85 written"/>');
       break;
 
       case "card":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("card");
-      $('#img3').prepend('<img src="../Images/card.png" />');
+      $('#img3').prepend('<img src="../Images/card.png" alt="Card with printed 56"/>');
       break;
 
       case "picture":
         if(!takenPic){
           $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
           inv.push("picture");
-          $('#img5').prepend('<img src="../Images/pictureIN.png" />');
+          $('#img5').prepend('<img src="../Images/pictureIN.png" alt="Picture in Frame"/>');
           takenPic = true;
         }
         else{
@@ -130,7 +130,7 @@ function takeSwitch(item) {
         if(!takenBat){
           $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
           inv.push("battery");
-          $('#img6').prepend('<img src="../Images/battery.png" />');
+          $('#img6').prepend('<img src="../Images/battery.png" alt="Battery"/>');
           takenBat = true;
         }
         else{
@@ -141,7 +141,7 @@ function takeSwitch(item) {
       case "screwdriver":
       $('#gameText').append("<p>-"+item+" placed in inventory.</p>");
       inv.push("screwdriver");
-      $('#img4').prepend('<img src="../Images/screwdriver.png" />');
+      $('#img4').prepend('<img src="../Images/screwdriver.png" alt="Screwdriver"/>');
       break;
 
       default:
@@ -282,7 +282,7 @@ function combineSwitch(item1, item2) {
       inv.splice(y, 1);
       $("#img2").empty();
       $("#img6").empty();
-      $('#img2').prepend('<img src="../Images/calculatorON.png" />');
+      $('#img2').prepend('<img src="../Images/calculatorON.png" alt="Calculator with Power"/>');
     }
     else { $('#gameText').append(noItems);}
   }
@@ -296,7 +296,7 @@ function combineSwitch(item1, item2) {
       inv.splice(x, 1);
       inv.splice(y, 1);
       $("#img5").empty();
-      $('#img5').prepend('<img src="../Images/pictureOUT.png" />');
+      $('#img5').prepend('<img src="../Images/pictureOUT.png" alt="Picture without Frame"/>');
 
     }
     else { $('#gameText').append(noItems);}
